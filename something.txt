@@ -1,0 +1,4 @@
+#! /bin/bash
+curl http://169.254.169.254/latest/meta-data/public-ipv4 > public-ip
+ssh-keyscan ip-172-31-25-191 >> $HOME/.ssh/known_hosts
+scp -i flawwwless-frankfurt.pem public-ip ubuntu@ip-172-31-25-191:/home/ubuntu/ips
