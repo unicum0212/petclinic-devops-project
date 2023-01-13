@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    tools {
+        terraform 'terraform'
+    }
+    
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                dir('terraform/env_2'){
+                    sh 'terraform init'
+                }
+                
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                dir('terraform/env_2'){
+                    sh 'terraform apply -auto-approve'
+                }
+                
+            }
+        }
+    }
+}
