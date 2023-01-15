@@ -8,7 +8,7 @@ pipeline{
         stage('Terraform Destroy') {
             steps {
                 dir('terraform/env_1'){
-                    sh 'terraform destroy -force'
+                    sh 'terraform apply -destroy -auto-approve'
                 }
             }
         }
