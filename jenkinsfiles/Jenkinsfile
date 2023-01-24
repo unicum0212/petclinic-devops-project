@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {     
-            args '-u root -v /home/ubuntu/ansible:/ansible/ -v /home/ubuntu/ansible/ansible.cfg:/etc/ansible/ansible.cfg'
+            args '-u root -v /home/ubuntu/ansible/blue:/ansible/ -v /home/ubuntu/ansible/blue/ansible.cfg:/etc/ansible/ansible.cfg'
         }
     }
 
