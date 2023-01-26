@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        dockerfile {     
+            args '-u root -v /home/ubuntu/ansible/green:/ansible/ -v /home/ubuntu/ansible/ansible.cfg:/etc/ansible/ansible.cfg'
+        }
+    }
+
+    stages {
+        stage("Pull") {
+            steps {
+                sh 'ansible-playbook /ansible/playbooks/pull-repo.yml'
+            }
+        }
+        stage("Testing") {
+            steps {       
+                sh 'ansible-playbook /ansible/playbooks/tests-playbook.yml'
+            }
+        }
+        stage("Deploy") {
+            steps {                
+                sh 'ansible-playbook  /ansible/playbooks/deploy-playbook.yml'
+            }
+        }
+    }
+}
