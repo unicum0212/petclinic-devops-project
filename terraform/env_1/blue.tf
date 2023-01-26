@@ -132,7 +132,3 @@ resource "aws_cloudwatch_metric_alarm" "blue_cpu_less_than_20" {
     aws_autoscaling_policy.petclinic_asg_down
   ]
 }
-
-output "dns_name_blue" {
-  value = aws_elb.petclinic_elb.dns_name
-}
