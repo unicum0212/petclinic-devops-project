@@ -12,19 +12,13 @@ pipeline{
         }
         stage('Terraform Init') {
             steps {
-                dir('terraform/env_1'){
-                    sh 'terraform init'
-                }
-                
+                sh 'terraform init'
             }
         }
         stage('Terraform Apply') {
             steps {
-                dir('terraform/env_1'){
-                    sh 'terraform apply -auto-approve -no-color'
-                    sh 'terraform output > file.txt'
-                }
-                
+                sh 'terraform apply -auto-approve -no-color'
+                sh 'terraform output > file.txt'
             }
         }
     }
