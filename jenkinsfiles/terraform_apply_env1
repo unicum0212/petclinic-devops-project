@@ -7,7 +7,7 @@ pipeline{
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/test.gitgit'
+                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/test.git'
             }
         }
         stage('Terraform Init') {
