@@ -1,7 +1,6 @@
 process.txt
 scheme-of-actions.txt
 terruser-creds.txt
-something.txt
 terraform/admin/.terraform
 terraform/admin/.terraform.lock.hcl
 terraform/admin/rds_and_ssm.tf

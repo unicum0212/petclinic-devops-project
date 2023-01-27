@@ -1,8 +1,0 @@
-#! /bin/bash
-curl http://169.254.169.254/latest/meta-data/public-ipv4 > public-ip
-ssh-keyscan ip-10-0-30-81 >> $HOME/.ssh/known_hosts
-scp -i flawwwless-frankfurt.pem public-ip ubuntu@ip-10-0-30-81::/home/ubuntu/ips
-
-
-awk '{print $3}' file.txt
-cat file.txt | tr -d '"' > file.txt
