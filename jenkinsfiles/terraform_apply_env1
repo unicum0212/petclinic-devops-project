@@ -7,18 +7,23 @@ pipeline{
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/test.git'
+                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
             }
         }
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                dir('terraform/env_1'){
+                    sh 'terraform init'
+                }
+                
             }
         }
         stage('Terraform Apply') {
             steps {
-                sh 'terraform apply -auto-approve -no-color'
-                sh 'terraform output > file.txt'
+                dir('terraform/env_1'){
+                    sh 'terraform apply -auto-approve -no-color'
+                }
+                
             }
         }
     }
