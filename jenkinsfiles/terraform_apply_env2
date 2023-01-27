@@ -22,6 +22,8 @@ pipeline{
             steps {
                 dir('terraform/env_2'){
                     sh 'terraform apply -auto-approve -no-color'
+                    sh 'terraform output > env_2.txt'
+                    sh 'sleep 60'
                 }
                 
             }
