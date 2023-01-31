@@ -13,6 +13,10 @@ data "aws_route53_zone" "public" {
   name = "devdimaops.tech"
 }
 
+data "aws_iam_role" "terraform-jenkins-role" {
+  name = "terraform-jenkins-role"
+}
+
 /*
 data "aws_ssm_parameter" "rds_password" {
   name = "/prod/mysql/password"
@@ -27,5 +31,4 @@ data "aws_ssm_parameter" "rds_username" {
     aws_ssm_parameter.rds_username
   ]
 }
-
 */
