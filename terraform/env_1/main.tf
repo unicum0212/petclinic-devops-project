@@ -20,10 +20,12 @@ data "terraform_remote_state" "admin" {
 }
 
 module "env_1" {
-  source    = "git@github.com:unicum0212/terraform-modules.git//environments"
-  sec_group = data.terraform_remote_state.admin.outputs.petclinic_sg_prod
+  source           = "git@github.com:unicum0212/terraform-modules.git//lb_and_asg"
+  min_size         = 1
+  max_size         = 2
+  min_elb_capacity = 1
 }
 
-output "env_1_public_ip" {
-  value = module.env_1.env_server_public_ip
+output "dns_name_env_1" {
+  value = module.env_1.dns_name_env_1
 }

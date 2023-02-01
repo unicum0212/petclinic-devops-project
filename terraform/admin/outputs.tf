@@ -2,6 +2,10 @@ output "petclinic_sg_prod" {
   value = module.petclinic_sg_prod.security_group_id
 }
 
+output "petclinic_sg_lb" {
+  value = module.petclinic_sg_lb.security_group_id
+}
+
 output "public_subnet_1" {
   value = aws_subnet.public_subnets[0].id
 }
