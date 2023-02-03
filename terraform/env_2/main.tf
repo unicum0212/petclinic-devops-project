@@ -25,6 +25,7 @@ module "env_2" {
   max_size         = 2
   min_elb_capacity = 1
   env              = "env2"
+  status = "Clean_Env2"
 }
 
 output "dns_name_env_2" {
