@@ -6,11 +6,11 @@ RUN apt-get update && \
 RUN apt-add-repository --yes ppa:ansible/ansible
 RUN apt update
 RUN apt install ansible -y
+RUN sudo apt-get install python3 -y
+RUN sudo apt-get install python3-pip -y
+RUN sudo pip3 install boto3
+RUN ansible-galaxy collection install amazon.aws
 
 RUN mkdir /ansible
-#RUN mkdir -p /ansible/green
-#RUN mkdir /ansible/blue
 
 ENV ANSIBLE_LOCAL_TEMP=/tmp
-
-CMD ["/usr/bin/bash"]
