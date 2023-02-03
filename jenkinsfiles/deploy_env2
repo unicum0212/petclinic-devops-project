@@ -6,19 +6,9 @@ pipeline {
     }
 
     stages {
-        stage("Pull") {
+        stage("Deploy App") {
             steps {
-                sh 'ansible-playbook /ansible/playbooks/pull-repo.yml'
-            }
-        }
-        stage("Testing") {
-            steps {       
-                sh 'ansible-playbook /ansible/playbooks/tests-playbook.yml'
-            }
-        }
-        stage("Deploy") {
-            steps {                
-                sh 'ansible-playbook  /ansible/playbooks/deploy-playbook.yml'
+                sh 'ansible-playbook /ansible/playbooks/deploy-playbook.yml'
             }
         }
     }
