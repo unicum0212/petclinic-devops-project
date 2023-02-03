@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    tools {
+        terraform 'terraform'
+    }
+    
+    stages {
+        stage('Build Infrastructure') {
+            steps {
+                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
+                dir('terraform/env_1'){
+                    sh 'terraform init -upgrade'
+                    sh 'terraform apply -auto-approve -no-color'
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t flawwwless/dynamic-ansible:latest .'
+            }
+        }
+    }
+}
