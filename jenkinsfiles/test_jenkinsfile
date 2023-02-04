@@ -14,10 +14,14 @@ pipeline{
                 }
             }
         }*/
-        stage('Docker Build and Push Image') {
+        stage('Build image') {
             steps {
                 dockerImage = docker.build("flawwwless/dynamic-inventory-ansible:latest")
-                withDockerRegistry(credentialsId: 'dockerHub') {
+            }
+        }
+        stage('Push Image') {
+            steps {
+                withDockerRegistry(credentialsId: 'dockerHub', url: "") {
                     dockerImage.push()
                 }
             }
