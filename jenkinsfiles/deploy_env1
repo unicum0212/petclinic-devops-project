@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
+                dir("/ansible/") {
+                    git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
+                }
             }
         }
         stage("Pull Source Code And Test App") {
