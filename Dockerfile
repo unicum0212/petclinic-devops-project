@@ -15,3 +15,5 @@ RUN ansible-galaxy collection install amazon.aws
 RUN mkdir /ansible
 
 ENV ANSIBLE_LOCAL_TEMP=/tmp
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
