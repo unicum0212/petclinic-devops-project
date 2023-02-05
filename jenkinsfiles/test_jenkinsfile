@@ -16,13 +16,14 @@ pipeline{
         }*/
         stage('Build image') {
             steps {
-                dockerImage = docker.build("flawwwless/dynamic-inventory-ansible:latest")
+                sh 'docker build flawwwless/dynamic-inventory-ansible:latest .'
             }
         }
         stage('Push Image') {
             steps {
-                withDockerRegistry(credentialsId: 'dockerHub', url: "") {
-                    dockerImage.push()
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker push flawwwless/dynamic-inventory-ansible:latest'
                 }
             }
         }
