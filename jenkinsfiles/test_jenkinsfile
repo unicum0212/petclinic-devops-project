@@ -33,11 +33,11 @@ pipeline{
             agent {
                 docker {
                     image 'flawwwless/dynamic-inventory-ansible:latest'
-                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg'
+                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg -'
                 }
             }
             steps {
-                git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
+                sh 'git clone git@github.com:unicum0212/ansible-roles-petclinic.git'
                 sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml'
             }
         }
