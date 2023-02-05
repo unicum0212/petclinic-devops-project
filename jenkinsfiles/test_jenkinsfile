@@ -37,6 +37,7 @@ pipeline{
                 }
             }
             steps {
+                git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
                 sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml'
             }
         }
