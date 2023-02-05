@@ -5,7 +5,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN apt-add-repository --yes ppa:ansible/ansible
 RUN apt update
-RUN apt install git -y
 RUN apt install ansible -y
 RUN apt-get install python3 -y
 RUN apt update
@@ -14,6 +13,7 @@ RUN pip3 install boto3
 RUN ansible-galaxy collection install amazon.aws
 
 RUN mkdir /ansible
+RUN mkdir /ansible/playbooks
 
 ENV ANSIBLE_LOCAL_TEMP=/tmp
 

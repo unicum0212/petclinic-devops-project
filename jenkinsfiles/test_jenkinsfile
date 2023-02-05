@@ -38,11 +38,11 @@ pipeline{
             agent {
                 docker {
                     image 'flawwwless/dynamic-inventory-ansible:latest'
-                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg -v /var/lib/docker/volumes/jenkins_home/_data/workspace/Test_docker/:/ansible/'
+                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg -v /var/lib/docker/volumes/jenkins_home/_data/workspace/Test_docker/:/ansible/playbooks'
                 }
             }
             steps {
-                sh 'ansible-playbook /ansible/tests-petclinic.yml'
+                sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml'
             }
         }
     }
