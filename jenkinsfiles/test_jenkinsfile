@@ -29,15 +29,19 @@ pipeline{
                 }
             }
         }
+        stage('Push Ansible Playbooks') {
+            steps {
+                git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
+            }
+        }
         stage('Pull repository and Start Tests') {
             agent {
                 docker {
                     image 'flawwwless/dynamic-inventory-ansible:latest'
-                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg -'
+                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg'
                 }
             }
             steps {
-                sh 'git clone git@github.com:unicum0212/ansible-roles-petclinic.git'
                 sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml'
             }
         }
