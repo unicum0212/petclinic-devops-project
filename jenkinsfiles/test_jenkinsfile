@@ -16,7 +16,7 @@ pipeline{
         }*/
         stage('Build image') {
             steps {
-                sh 'docker build flawwwless/dynamic-inventory-ansible:latest .'
+                sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
             }
         }
         stage('Push Image') {
