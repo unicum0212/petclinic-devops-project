@@ -5,6 +5,7 @@ pipeline{
     }
     
     stages {
+        /*
         stage('Build Infrastructure') {
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
@@ -14,6 +15,7 @@ pipeline{
                 }
             }
         }
+        */
         stage('Build image') {
             steps {
                 sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
@@ -31,6 +33,7 @@ pipeline{
             agent {
                 docker {
                     image 'flawwwless/dynamic-inventory-ansible:latest'
+                    args '-u root -v /home/ubuntu/ansible/env_1:/ansible/ -v /home/ubuntu/ansible/env_1/ansible.cfg:/etc/ansible/ansible.cfg'
                 }
             }
             steps {
