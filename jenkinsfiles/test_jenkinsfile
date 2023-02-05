@@ -5,7 +5,7 @@ pipeline{
     }
     
     stages {
-        /*stage('Build Infrastructure') {
+        stage('Build Infrastructure') {
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
                 dir('terraform/env_1'){
@@ -13,7 +13,7 @@ pipeline{
                     sh 'terraform apply -auto-approve -no-color'
                 }
             }
-        }*/
+        }
         stage('Build image') {
             steps {
                 sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
@@ -25,6 +25,16 @@ pipeline{
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                     sh 'docker push flawwwless/dynamic-inventory-ansible:latest'
                 }
+            }
+        }
+        stage('Pull repository and Start Tests') {
+            agent {
+                docker {
+                    image 'flawwwless/dynamic-inventory-ansible:latest'
+                }
+            }
+            steps {
+                sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml'
             }
         }
     }
