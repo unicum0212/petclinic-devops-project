@@ -57,6 +57,7 @@ pipeline{
         stage('Change Status of Server') {
             steps {
                 dir('terraform/env_2'){
+                    sh 'terraform init -reconfigure'
                     sh 'terraform apply -var="status=Deployed" -auto-approve -no-color'
                 }
                 
