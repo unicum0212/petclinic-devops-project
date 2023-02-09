@@ -9,7 +9,7 @@ pipeline{
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
                 dir('terraform/env_2'){
-                    sh 'terraform init -upgrade'
+                    sh 'terraform init'
                     sh 'terraform apply -auto-approve -no-color'
                 }
             }
@@ -58,7 +58,7 @@ pipeline{
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
                 dir('terraform/env_2'){
-                    sh 'terraform init -reconfigure'
+                    sh 'terraform init'
                     sh 'terraform apply -var="status=Deployed" -auto-approve -no-color'
                 }
                 
