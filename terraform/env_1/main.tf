@@ -2,6 +2,10 @@ provider "aws" {
   region = "eu-central-1"
 }
 
+variable "status" {
+  default = "Clean"
+}
+
 terraform {
   backend "s3" {
     bucket = "mid.project.tfstate.file"
@@ -24,7 +28,7 @@ module "env_1" {
   min_size         = 1
   max_size         = 2
   min_elb_capacity = 1
-  status           = "Clean"
+  status           = var.status
 }
 
 output "dns_name_env_1" {
