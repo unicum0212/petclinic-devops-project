@@ -8,25 +8,31 @@ pipeline{
         stage('Build Infrastructure && Build Image && Push Image') {
             parallel {          
                 stage('Build Infrastructure') {
-                    git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'  
-                    dir('terraform/env_1'){
-                        sh 'terraform init'
-                        sh 'terraform apply -auto-approve -no-color'
+                    steps {
+                        git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'  
+                        dir('terraform/env_1'){
+                            sh 'terraform init'
+                            sh 'terraform apply -auto-approve -no-color'
+                        }
                     }
-                    
                 }
                 stage('Build Image') {
-                    sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
-                }
-                stage('Push Image') {
-                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                        sh 'docker push flawwwless/dynamic-inventory-ansible:latest'
+                    steps{
+                        sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
                     }
+                    
                 }
             }
         }
 
+        stage('Push Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker push flawwwless/dynamic-inventory-ansible:latest'
+                }
+            }            
+        }
         stage('Pull Ansible Roles') {
             steps {
                 git branch: 'main', credentialsId: 'github-key', url: 'git@github.com:unicum0212/ansible-roles-petclinic.git'
