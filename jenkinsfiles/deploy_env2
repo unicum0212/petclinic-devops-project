@@ -5,20 +5,26 @@ pipeline{
     }
     
     stages {
-        stage('Build Infrastructure') {
-            steps {
-                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
-                dir('terraform/env_2'){
-                    sh 'terraform init'
-                    sh 'terraform apply -auto-approve -no-color'
+        stage('Build Infrastructure && Build Image && Push Image') {
+            parallel {          
+                stage('Build Infrastructure') {
+                    steps {
+                        git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'  
+                        dir('terraform/env_2'){
+                            sh 'terraform init'
+                            sh 'terraform apply -auto-approve -no-color'
+                        }
+                    }
+                }
+                stage('Build Image') {
+                    steps{
+                        sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
+                    }
+                    
                 }
             }
         }
-        stage('Build image') {
-            steps {
-                sh 'docker build -t flawwwless/dynamic-inventory-ansible:latest .'
-            }
-        }
+
         stage('Push Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
@@ -54,6 +60,7 @@ pipeline{
                 sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml'
             }
         }
+        /*
         stage('Change Status of Server') {
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
@@ -64,5 +71,6 @@ pipeline{
                 
             }
         }
+        */
     }
 }

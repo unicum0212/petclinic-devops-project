@@ -60,6 +60,7 @@ pipeline{
                 sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml'
             }
         }
+        /*
         stage('Change Status of Server') {
             steps {
                 git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
@@ -70,5 +71,6 @@ pipeline{
                 
             }
         }
+        */
     }
 }
