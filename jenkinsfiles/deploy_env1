@@ -60,17 +60,16 @@ pipeline{
                 sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml -e "hosts_tag=tag_Name_PetClinic_ASG_env1"'
             }
         }
-        /*
         stage('Change Status of Server') {
-            steps {
-                git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
-                dir('terraform/env_1'){
-                    sh 'terraform init'
-                    sh 'terraform apply -var="status=Deployed" -auto-approve -no-color'
+            agent {
+                docker {
+                    image 'flawwwless/dynamic-inventory-ansible:latest'
+                    args '-u root -v /home/ubuntu/script.sh:/root/script.sh'
                 }
-                
+            }
+            steps {
+                sh './script.sh'
             }
         }
-        */
     }
 }
