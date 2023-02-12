@@ -18,7 +18,8 @@ RUN apt install curl \
 # Install aws-cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/root/awscliv2.zip"
 RUN unzip /root/awscliv2.zip
-RUN /root/aws/install --update
+RUN /root/aws/install
+RUN rm /root/awscliv2.zip
 
 RUN mkdir /ansible
 RUN mkdir /ansible/playbooks
