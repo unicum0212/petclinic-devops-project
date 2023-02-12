@@ -68,7 +68,7 @@ pipeline{
                 }
             }
             steps {
-                sh './script.sh'
+                sh '/root/script.sh'
             }
         }
     }
