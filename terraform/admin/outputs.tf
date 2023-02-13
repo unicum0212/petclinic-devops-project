@@ -21,6 +21,10 @@ output "public_subnet_3" {
 output "id_of_vpc" {
   value = aws_vpc.project_vpc.id
 }
+
+output "certificate" {
+  value = aws_acm_certificate.petclinic_certificate.id
+}
 /*
 output "rds_endpoint" {
   value = aws_db_instance.petclinic_db.address
