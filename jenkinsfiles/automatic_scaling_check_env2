@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        docker {
+            image 'flawwwless/dynamic-inventory-ansible:latest'
+            args '-u root -v /home/ubuntu/ansible:/ansible/ -v /home/ubuntu/ansible/ansible.cfg:/etc/ansible/ansible.cfg'
+        }
+    }
+
+    stages {
+        stage('Checking') {
+            steps {
+                sh '''
+                ansible-inventory -i /ansible/aws_ec2.yml --list | grep tag_Status_Clean_Env2 > env_2
+                if [ -s env_2 ]; then
+                    echo "File env_2 is not empty"
+                    rm env_2
+                    exit 1
+                fi
+                '''
+            }
+        }
+    }
+}
