@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 variable "status" {
-  default = "Clean"
+  default = "Clean_Env2"
 }
 
 terraform {
