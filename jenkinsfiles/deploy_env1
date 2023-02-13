@@ -46,7 +46,7 @@ pipeline{
                 }
             }
             steps {
-                sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml -e "hosts_tag=tag_Name_PetClinic_ASG_env1"'
+                sh 'ansible-playbook /ansible/playbooks/tests-petclinic.yml -e "hosts_tag=tag_Status_Clean_Env1"'
             }
         }
         stage('Deploy App on Clean Server') {
@@ -57,7 +57,7 @@ pipeline{
                 }
             }
             steps {
-                sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml -e "hosts_tag=tag_Name_PetClinic_ASG_env1"'
+                sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml -e "hosts_tag=tag_Status_Clean_Env1"'
             }
         }
         stage('Change Status of Server') {
