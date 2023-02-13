@@ -14,6 +14,9 @@ pipeline {
                 if [ -s env_1 ]; then
                     echo "File env_1 is not empty"
                     rm env_1
+                    exit 0
+                else 
+                    exit 1
                 fi
                 '''
             }
