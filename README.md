@@ -2,7 +2,7 @@
 URL: https://petclinic.devdimaops.tech/
 ![Photo](AWS-infrastructure.png)
 
-Blue/Green Deployment
+## Tools
 - AWS:
   - EC2:
     - Classic Load Balancer
