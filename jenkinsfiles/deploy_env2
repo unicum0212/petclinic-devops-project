@@ -78,5 +78,14 @@ pipeline{
                 sh 'echo "ACTIVE_ENV=env_2" > /etc/environment'
             }
         }
+
+        post {
+            aborted {
+                dir('terraform/env_2'){
+                    sh 'terraform init'
+                    sh 'terraform apply -destroy -auto-approve -no-color'
+                }
+            }
+        }
     }
 }
