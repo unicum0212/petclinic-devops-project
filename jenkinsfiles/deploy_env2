@@ -81,9 +81,8 @@ pipeline{
     }
     post {
         aborted {
-                sh 'terraform -chdir=terraform/env_2 init -reconfigure'
-                sh 'terraform -chdir=terraform/env_2 apply -destroy -auto-approve -no-color'
-            }
+            sh 'terraform -chdir=terraform/env_2 init -reconfigure'
+            sh 'terraform -chdir=terraform/env_2 apply -destroy -auto-approve -no-color'
         }
     }
 }
