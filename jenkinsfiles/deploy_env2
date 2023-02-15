@@ -82,7 +82,7 @@ pipeline{
     post {
         aborted {
             dir('terraform/env_2'){
-                sh 'terraform init'
+                sh 'terraform init -reconfigure'
                 sh 'terraform apply -destroy -auto-approve -no-color'
             }
         }
