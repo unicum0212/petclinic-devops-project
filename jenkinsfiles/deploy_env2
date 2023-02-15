@@ -25,6 +25,17 @@ pipeline{
             }
         }
         
+        stage('Change Status of Server') {
+            agent {
+                docker {
+                    image 'flawwwless/dynamic-inventory-ansible:latest'
+                    args '-u root -v /home/ubuntu/script.sh:/root/script.sh'
+                }
+            }
+            steps {
+                sh '/root/script.sh'
+            }
+        }
         stage('Push Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
@@ -58,17 +69,6 @@ pipeline{
             }
             steps {
                 sh 'ansible-playbook /ansible/playbooks/deploy-petclinic.yml -e "hosts_tag=tag_Status_Clean_Env2"'
-            }
-        }
-        stage('Change Status of Server') {
-            agent {
-                docker {
-                    image 'flawwwless/dynamic-inventory-ansible:latest'
-                    args '-u root -v /home/ubuntu/script.sh:/root/script.sh'
-                }
-            }
-            steps {
-                sh '/root/script.sh'
             }
         }
         stage('Change Active Env') {
