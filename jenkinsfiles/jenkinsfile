@@ -71,5 +71,13 @@ pipeline{
                 sh '/root/script.sh'
             }
         }
+        stage('Change Active Env') {
+            input{
+                message "Do you want to change active environment to Env2?"
+            }
+            steps { 
+                sh 'echo "ACTIVE_ENV=env_2" > /etc/environment'
+            }
+        }
     }
 }
