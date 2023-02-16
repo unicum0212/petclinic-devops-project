@@ -87,6 +87,9 @@ pipeline{
                     sh 'terraform init -reconfigure'
                     sh 'terraform apply -destroy -auto-approve -no-color'
                 }
+                else {
+                    sh 'echo doesnt exist'
+                }
                 
             }
             /*
