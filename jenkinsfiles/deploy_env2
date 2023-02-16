@@ -82,6 +82,7 @@ pipeline{
     post {
         aborted {
             script {
+                sh 'pwd'
                 sh 'terraform init -reconfigure'
                 sh 'terraform apply -destroy -auto-approve -no-color'
             }
