@@ -81,8 +81,11 @@ pipeline{
     }
     post {
         aborted {
-            sh 'terraform -chdir=terraform/env_2 init -reconfigure'
-            sh 'terraform -chdir=terraform/env_2 apply -destroy -auto-approve -no-color'
+            git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
+            dir('terraform/env_2') {
+                sh 'terraform -chdir=terraform/env_2 init -reconfigure'
+                sh 'terraform -chdir=terraform/env_2 apply -destroy -auto-approve -no-color'
+            }
         }
     }
 }
