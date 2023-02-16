@@ -79,26 +79,4 @@ pipeline{
             }
         }
     }
-    post {
-        aborted {
-            script {
-                if (getContext(hudson.FilePath)) {
-                    sh 'pwd'
-                    sh 'terraform init -reconfigure'
-                    sh 'terraform apply -destroy -auto-approve -no-color'
-                }
-                else {
-                    sh 'echo doesnt exist'
-                }
-                
-            }
-            /*
-            git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
-            dir('terraform/env_2') {
-                sh 'terraform init -reconfigure'
-                sh 'terraform apply -destroy -auto-approve -no-color'
-            }
-            */
-        }
-    }
 }
