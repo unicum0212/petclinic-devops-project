@@ -82,9 +82,12 @@ pipeline{
     post {
         aborted {
             script {
-                sh 'pwd'
-                sh 'terraform init -reconfigure'
-                sh 'terraform apply -destroy -auto-approve -no-color'
+                if (getContext(hudson.FilePath)) {
+                    sh 'pwd'
+                    sh 'terraform init -reconfigure'
+                    sh 'terraform apply -destroy -auto-approve -no-color'
+                }
+                
             }
             /*
             git branch: 'main', credentialsId: 'github-ssh-key', url: 'git@github.com:unicum0212/petclinic-devops-deploy.git'
