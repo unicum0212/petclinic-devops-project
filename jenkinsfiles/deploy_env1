@@ -5,7 +5,7 @@ pipeline{
     }
     
     stages {
-        stage('Build Infrastructure && Build Image && Push Image') {
+        stage('Build Infrastructure && Build Image') {
             parallel {          
                 stage('Build Infrastructure') {
                     steps {
