@@ -13,8 +13,8 @@ resource "aws_instance" "admin_server" {
     Name = "Admin"
   }
 }
-/*
+
 resource "aws_eip" "admin_eip" {
   instance = aws_instance.admin_server.id
 }
-*/
+

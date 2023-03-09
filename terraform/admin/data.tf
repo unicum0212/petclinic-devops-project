@@ -17,7 +17,7 @@ data "aws_iam_role" "terraform-jenkins-role" {
   name = "terraform-jenkins-role"
 }
 
-/*
+
 data "aws_ssm_parameter" "rds_password" {
   name = "/prod/mysql/password"
   depends_on = [
@@ -31,4 +31,3 @@ data "aws_ssm_parameter" "rds_username" {
     aws_ssm_parameter.rds_username
   ]
 }
-*/

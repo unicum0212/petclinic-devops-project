@@ -3,7 +3,6 @@ scheme-of-actions.txt
 terruser-creds.txt
 terraform/admin/.terraform
 terraform/admin/.terraform.lock.hcl
-terraform/admin/rds_and_ssm.tf
 terraform/env_1/.terraform
 terraform/env_1/.terraform/terraform.tfstate
 terraform/env_1/.terraform.lock.hcl
