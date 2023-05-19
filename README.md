@@ -2,6 +2,9 @@
 URL: https://petclinic.devdimaops.tech/
 ![Photo](AWS-infrastructure.png)
 
+## Description
+When Commit is triggered, Jenkins on the admin server launches Pipeline, which brings up the Green environment, pulls the application code, tests and deploys it. If the tests were successful, pass the traffic to the Green env.
+
 ## Tools
 - AWS:
   - EC2:
